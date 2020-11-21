@@ -49,7 +49,8 @@ jobs:
       - name: Compile Sketch
         run: |
           arduino-cli compile --fqbn community_nrf52:nrf52:${{ matrix.fqbn }}  ./${{ matrix.sketch }} 
-          uf2conv.py ./${{ matrix.sketch }}/build/${{ matrix.sketch }}.ino.hex -c -f 0xADA52840
+          ls .arduino15/packages/adafruit/hardware/nrf52/
+          .arduino15/packages/adafruit/hardware/nrf52/**/tools/uf2conv/uf2conv.py ./${{ matrix.sketch }}/build/${{ matrix.sketch }}.ino.hex -c -f 0xADA52840
           ls -lR ./${{ matrix.sketch }} 
       - name: Archive artifacts
         uses: actions/upload-artifact@v2
