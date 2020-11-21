@@ -49,4 +49,4 @@ jobs:
       - name: Compile Sketch
         run: |
           arduino-cli compile --fqbn ${{ matrix.fqbn }}  ${{ matrix.sketch }} 
-          ls ${{ matrix.sketch }} 
+          ls ${{ matrix.sketch }}\build
