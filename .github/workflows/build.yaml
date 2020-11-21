@@ -51,11 +51,9 @@ jobs:
           BSP_PATH: .arduino15/packages/adafruit/hardware/nrf52
         run: |
           arduino-cli compile --fqbn community_nrf52:nrf52:${{ matrix.fqbn }}  ./${{ matrix.sketch }} 
-          ls $HOME/$BSP_PATH/
           BSP_VERSION=`eval ls $HOME/$BSP_PATH`
-          ls -lR $HOME/$BSP_PATH/$BSP_VERSION
-          cp $HOME/$BSP_PATH/$BSP_VERSION/tools/uf2conv/uf2conv.py $GITHUB_WORKSPACE/uf2conv.py
-          $GITHUB_WORKSPACE/uf2conv.py ./${{ matrix.sketch }}/build/${{ matrix.sketch }}.ino.hex -c -f 0xADA52840
+          ls -l $HOME/$BSP_PATH/$BSP_VERSION/tools/uf2conv/
+          python $HOME/$BSP_PATH/$BSP_VERSION/tools/uf2conv/uf2conv.py ./${{ matrix.sketch }}/build/${{ matrix.sketch }}.ino.hex -c -f 0xADA52840
           ls -lR ./${{ matrix.sketch }} 
       - name: Archive artifacts
         uses: actions/upload-artifact@v2
