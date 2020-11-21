@@ -47,4 +47,6 @@ jobs:
           arduino-cli lib list
 
       - name: Compile Sketch
-        run: arduino-cli compile --fqbn ${{ matrix.fqbn }}  ${{ matrix.sketch }} 
+        run: |
+          arduino-cli compile --fqbn ${{ matrix.fqbn }}  ${{ matrix.sketch }} 
+          ls ${{ matrix.sketch }} 
