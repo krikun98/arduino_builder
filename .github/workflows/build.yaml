@@ -17,6 +17,10 @@ jobs:
       # First of all, we clone the repo using the checkout action.
       - name: Checkout
         uses: actions/checkout@master
+      - name: Setup Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: '3.8'
       # We use the arduino/setup-arduino-cli action to install and
       # configure the Arduino CLI on the system.
       - name: Setup Arduino CLI
@@ -29,6 +33,7 @@ jobs:
           BSP_URL_ADA: https://adafruit.github.io/arduino-board-index/package_adafruit_index.json
           BSP_PATH_ADA: .arduino15/packages/adafruit/hardware/nrf52
         run: |
+          pip3 install adafruit-nrfutil
           arduino-cli config init
           arduino-cli core update-index
           arduino-cli core update-index --additional-urls $BSP_URL_ADA
