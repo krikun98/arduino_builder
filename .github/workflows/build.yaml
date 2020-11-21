@@ -9,7 +9,7 @@ jobs:
       fail-fast: false
       matrix:
         sketch: ['./blink']
-        fqbn: ['community_nrf52:nrf52:pca10056', 'adafruit:nrf52:pca10056']
+        fqbn: ['pca10056', 'pca10056']
 
     runs-on: ubuntu-latest
     
@@ -48,5 +48,5 @@ jobs:
 
       - name: Compile Sketch
         run: |
-          arduino-cli compile --fqbn ${{ matrix.fqbn }}  ${{ matrix.sketch }} 
-          ls ${{ matrix.sketch }}/build/${{ matrix.fqbn }}
+          arduino-cli compile --fqbn community_nrf52:nrf52:${{ matrix.fqbn }}  ${{ matrix.sketch }} 
+          ls -lR ${{ matrix.sketch }} 
