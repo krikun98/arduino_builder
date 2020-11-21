@@ -53,8 +53,9 @@ jobs:
           arduino-cli compile --fqbn community_nrf52:nrf52:${{ matrix.fqbn }}  ./${{ matrix.sketch }} 
           BSP_VERSION=`eval ls $HOME/$BSP_PATH`
           ls -l $HOME/$BSP_PATH/$BSP_VERSION/tools/uf2conv/
-          python $HOME/$BSP_PATH/$BSP_VERSION/tools/uf2conv/uf2conv.py ./${{ matrix.sketch }}/build/${{ matrix.sketch }}.ino.hex -c -f 0xADA52840
-          ls -lR ./${{ matrix.sketch }} 
+          BUILDLOC=`eval ls ./${{ matrix.sketch }}/build`
+          python $HOME/$BSP_PATH/$BSP_VERSION/tools/uf2conv/uf2conv.py ./${{ matrix.sketch }}/build/$BUILDLOC/${{ matrix.sketch }}.ino.hex -c -f 0xADA52840
+          ls -lR ./${{ matrix.sketch }}/build/$BUILDLOC/
       - name: Archive artifacts
         uses: actions/upload-artifact@v2
         with:
