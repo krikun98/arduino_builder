@@ -9,7 +9,7 @@ jobs:
       fail-fast: false
       matrix:
         sketch: ['blink']
-        fqbn: ['pca10056', 'pca10059']
+        fqbn: ['pca10056']
 
     runs-on: ubuntu-latest
     
